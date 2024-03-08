@@ -6,7 +6,7 @@ function ProductHomeNew({ product }) {
     <View style={{ width: 134, height: '90%', borderRadius: 10 }}>
       <Image source={{
         uri: product?.image
-      }} style={{ height: '70%', width: '100%', borderTopLeftRadius: 10, borderTopRightRadius: 10 }} />
+      }} style={{ height: '70%', width: '100%', borderTopLeftRadius: 10, borderTopRightRadius: 10 }} resizeMode='stretch'/>
       <Text className='text-sm font-bold text-red-500' >{formatCurrency(product?.price)}</Text>
       <Text className='text-sm text-black overflow-hidden' ellipsizeMode='tail' numberOfLines={1} >{product?.name}</Text>
     </View>

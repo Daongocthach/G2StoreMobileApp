@@ -31,7 +31,8 @@ const getStyles = (colorScheme) => {
     body: {
       backgroundColor: colorScheme == 'light' ? 'white' : '#121212',
       gap: 5,
-      alignItems:'center'
+      alignItems:'center',
+      marginTop: 10
     },
     icon: {
       color: colorScheme == 'dark' ? '#AAAAAA' : '#696969'

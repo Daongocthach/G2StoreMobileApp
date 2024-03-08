@@ -7,8 +7,9 @@ import { useDispatch } from 'react-redux'
 import * as Progress from 'react-native-progress'
 import getStyles from './styles'
 import showAlertOk from '../../../components/Alert/AlertOk'
-import { FIREBASE_AUTH } from '../../../../firebase'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import authenApi from '../../../apis/authenApi'
+import { login } from '../../../redux/actions/auth'
+
 
 function Register() {
   const dispatch = useDispatch()
@@ -16,12 +17,15 @@ function Register() {
   const { colorScheme } = useColorScheme()
   const styles = getStyles(colorScheme)
   const [email, setEmail] = useState('')
+  const [userName, setUserName] = useState('')
+  const [fullName, setFullName] = useState('')
+  const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
   const [rePassword, setRePassword] = useState('')
   const [loading, setLoading] = useState(false)
-  const auth = FIREBASE_AUTH
+
   const handleRegister = async () => {
-    if (email == '' || password == '') {
+    if (userName == '' || password == '') {
       showAlertOk('Bạn chưa điền đầy đủ thông tin', 'Bấm Ok để tiếp tục')
     }
     else if (password !== rePassword) {
@@ -32,19 +36,21 @@ function Register() {
     }
     else {
       setLoading(true)
-      try {
-        const response = await createUserWithEmailAndPassword(auth, email, password)
-        console.log(response)
-        setTimeout(() => {
+      authenApi.signup(userName, password, email, fullName, phone)
+        .then(response => {
+          dispatch(login(response.data))
           showAlertOk('Đăng ký thành công', 'Đăng nhập để tiếp tục')
-          navigation.navigate('Login')
-        }, 1000)
-      } catch (error) {
-        console.log(error)
-        showAlertOk('Đăng ký thất bại', 'Vui lòng kiểm tra lại thông tin')
-      } finally {
-        setLoading(false)
-      }
+          setTimeout(() => {
+            navigation.navigate('Login')
+          }, 1000)
+        })
+        .catch(error => {
+          console.log(error)
+          showAlertOk('Vui lòng kiểm tra lại', 'Sai tài khoản hoặc mật khẩu')
+        })
+        .finally(() => {
+          setLoading(false)
+        })
     }
   }
   return (
@@ -60,16 +66,19 @@ function Register() {
           <TextInput style={styles.input} placeholder='Nhập email' placeholderTextColor={'#BBBBBB'} onChangeText={setEmail} value={email} />
         </View>
         <View style={{ ...styles.flexView, marginHorizontal: 20 }}>
-          <TextInput style={styles.input} placeholder='Nhập họ và tên' placeholderTextColor={'#BBBBBB'} onChangeText={setEmail} value={email} />
+          <TextInput style={styles.input} placeholder='Nhập tên đăng nhập' placeholderTextColor={'#BBBBBB'} onChangeText={setUserName} value={userName} />
         </View>
         <View style={{ ...styles.flexView, marginHorizontal: 20 }}>
-          <TextInput style={styles.input} placeholder='Nhập số điện thoại' placeholderTextColor={'#BBBBBB'} onChangeText={setEmail} value={email} />
+          <TextInput style={styles.input} placeholder='Nhập họ và tên' placeholderTextColor={'#BBBBBB'} onChangeText={setFullName} value={fullName} />
+        </View>
+        <View style={{ ...styles.flexView, marginHorizontal: 20 }}>
+          <TextInput style={styles.input} placeholder='Nhập số điện thoại' placeholderTextColor={'#BBBBBB'} onChangeText={setPhone} value={phone} />
         </View>
         <View style={{ ...styles.flexView, marginHorizontal: 20 }}>
           <TextInput style={styles.input} secureTextEntry={true} placeholder='Nhập mật khẩu' placeholderTextColor={'#BBBBBB'} onChangeText={setPassword} value={password} />
         </View>
         <View style={{ ...styles.flexView, marginHorizontal: 20 }}>
-          <TextInput style={styles.input} secureTextEntry={true} placeholder='Xác nhận mật khẩu' placeholderTextColor={'#BBBBBB'} onChangeText={setPassword} value={password} />
+          <TextInput style={styles.input} secureTextEntry={true} placeholder='Xác nhận mật khẩu' placeholderTextColor={'#BBBBBB'} onChangeText={setRePassword} value={rePassword} />
         </View>
         <TouchableOpacity style={styles.buttonSubmit} onPress={handleRegister}>
           <Text style={{ ...styles.text, color: 'white' }}>Tạo tài khoản</Text>

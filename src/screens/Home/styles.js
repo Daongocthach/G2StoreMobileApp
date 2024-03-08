@@ -21,8 +21,7 @@ const getStyles = (colorScheme) => {
       flex: 5,
       flexDirection: 'column',
       display: 'flex',
-      paddingTop: 10,
-      backgroundColor: colorScheme == 'dark' ? 'black' : 'white'
+      backgroundColor: colorScheme == 'dark' ? 'black' : '#EEEEEE'
     },
     footer: {
       flex: 0.8,

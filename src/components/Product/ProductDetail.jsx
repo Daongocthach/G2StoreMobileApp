@@ -9,7 +9,7 @@ function ProductDetail({ product }) {
     <View style={{ width: '100%', height: '100%', backgroundColor: 'white', flexDirection: 'column', paddingHorizontal: 5 }}>
       <Image source={{
         uri: product?.image
-      }} style={{ height: '65%', width: '100%', borderRadius: 10 }} />
+      }} style={{ height: '65%', width: '100%', borderRadius: 10 }} resizeMode='stretch'/>
       <View >
         <Text className='text-xl font-bold text-red-500' >{formatCurrency(product?.price)}</Text>
         <Text className='text-xl font-semibold text-gray-600 h-14 ' ellipsizeMode='tail' numberOfLines={2} >{product?.name}</Text>
@@ -25,7 +25,7 @@ function ProductDetail({ product }) {
             </View>
             <Text className='text-xl font-light text-gray-600' >(10)</Text>
           </View>
-          <Text className='text-lg font-medium text-gray-600' >{product?.solded} đã bán</Text>
+          <Text className='text-lg font-medium text-gray-600' >3 đã bán</Text>
         </View>
         <Text className='text-sm font-medium text-gray-600' >Hồ chí Minh</Text>
       </View>

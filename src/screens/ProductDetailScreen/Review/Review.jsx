@@ -17,7 +17,6 @@ function Review({ productId }) {
               <Icon name='star-outline' size={10} color={'#EEAD0E'} />
               <Text style={{ fontSize: 12 }}>Thach</Text>
             </View>
-
           </View>
           <TouchableOpacity style={{ borderRadius: 10, flex: 1 }}>
             <View className='flex-row justify-end items-center gap-1'>
@@ -28,10 +27,14 @@ function Review({ productId }) {
               uri: mockData?.products[0]?.image
             }} style={{ height: '90%', aspectRatio: 1 / 1, borderRadius: 10 }} />
           </TouchableOpacity>
-
         </View>
       ))
       }
+      <Text className='text-sm font-bold text-red-400 text-right' >Xem chi tiết</Text>
+      <Text className='text-sm font-bold text-red-400 text-right' >Xem chi tiết</Text>
+      <Text className='text-sm font-bold text-red-400 text-right' >Xem chi tiết</Text>
+      <Text className='text-sm font-bold text-red-400 text-right' >Xem chi tiết</Text>
+      <Text className='text-sm font-bold text-red-400 text-right' >Xem chi tiết</Text>
     </View>
   )
 }

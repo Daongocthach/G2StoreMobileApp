@@ -1,19 +1,18 @@
-
 import { combineReducers } from 'redux'
 import authReducer from './auth'
-import categoriesIncomeReducer from './categoriesIncome'
-import categoriesExpenseReducer from './categoriesExpense'
-import bottlesReducer from './bottles'
-import incomesReducer from './incomes'
-import expensesReducer from './expenses'
+import subCategoryReducer from './subCategory'
+import cartReducer from './cart'
+import categoriesReducer from './categories'
+import providersReducer from './providers'
+import productsReducer from './products'
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    categoriesIncome: categoriesIncomeReducer,
-    categoriesExpense: categoriesExpenseReducer,
-    bottles: bottlesReducer,
-    incomes: incomesReducer,
-    expenses: expensesReducer
+    subCategory: subCategoryReducer,
+    cart: cartReducer,
+    categories: categoriesReducer,
+    providers: providersReducer,
+    products: productsReducer
 })
 
 export default rootReducer

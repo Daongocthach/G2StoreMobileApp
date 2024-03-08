@@ -5,12 +5,24 @@ export function formatCurrency(amount) {
     }).format(amount)
 }
 
-export function formatCurrencyToNumber(formattedAmount) {
-    // Loại bỏ dấu phẩy và ký hiệu tiền tệ
-    const cleanedValue = formattedAmount.replace(/[^\d]/g, '')
-
-    // Chuyển đổi thành giá trị số
-    const numericValue = parseFloat(cleanedValue)
-
-    return numericValue
+export const sortByMaxPrice = (originalArray) => {
+    if (!originalArray) return []
+    const clonedArray = [...originalArray]
+    return clonedArray.sort((a, b) => b.price - a.price)
+}
+export const sortByMinPrice = (originalArray) => {
+    if (!originalArray) return []
+    const clonedArray = [...originalArray]
+    return clonedArray.sort((a, b) => a.price - b.price)
+}
+export const sortByMaxId = (originalArray) => {
+    if (!originalArray) return []
+    const clonedArray = [...originalArray]
+    return clonedArray.sort((a, b) => b.id - a.id)
+}
+export const sortByMaxIdAndPriceRange = (originalArray, minPrice, maxPrice) => {
+    if (!originalArray) return []
+    const clonedArray = [...originalArray]
+    return clonedArray
+        .filter((item) => item.price >= minPrice && item.price <= maxPrice)
 }

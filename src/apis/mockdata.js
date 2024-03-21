@@ -149,4 +149,27 @@ export const mockData = {
         }
 
     ],
+    cartItems: [
+        
+        {
+            _id: 'product-id-03',
+            name: 'Lạp xưởng mai quế lộ bịch 500 g',
+            price: 150000,
+            solded: 135,
+            description: 'Sữa Milo 180 ml',
+            image:'https://3.bp.blogspot.com/-xNF51vno_-A/UfMnpSGMZGI/AAAAAAAAA_c/I7NEnUWaH_k/s1600/ffw1334395607.jpg',
+            reviews: [
+            ]
+        },
+        {
+            _id: 'product-id-03',
+            name: 'Lạp xưởng mai quế lộ bịch 500 g',
+            price: 150000,
+            solded: 135,
+            description: 'Sữa Milo 180 ml',
+            image:'https://3.bp.blogspot.com/-xNF51vno_-A/UfMnpSGMZGI/AAAAAAAAA_c/I7NEnUWaH_k/s1600/ffw1334395607.jpg',
+            reviews: [
+            ]
+        }
+    ],
 }

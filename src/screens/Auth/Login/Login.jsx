@@ -9,6 +9,8 @@ import getStyles from './styles'
 import showAlertOk from '../../../components/Alert/AlertOk'
 import { login } from '../../../redux/actions/auth'
 import authenApi from '../../../apis/authenApi'
+import cartItemApi from '../../../apis/cartItemApi'
+import { setCart } from '../../../redux/actions/cart'
 
 function Login() {
   const dispatch = useDispatch()
@@ -27,6 +29,8 @@ function Login() {
       authenApi.signin(username, password)
         .then(response => {
           dispatch(login(response.data))
+          cartItemApi.getCartItemsByCustomerId(response.data.id)
+            .then(response => { dispatch(setCart(response.data)) })
           showAlertOk('Đăng nhập thành công', 'Bấm Ok để tiếp tục')
           setTimeout(() => {
             navigation.navigate('Tài khoản')

@@ -1,4 +1,4 @@
-import { Text, View, Image, TouchableOpacity, TextInput } from 'react-native'
+import { Text, View, Image, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useNavigation } from '@react-navigation/native'
 import { useColorScheme } from 'nativewind'
@@ -13,7 +13,7 @@ const Chat = ({ eWallet }) => {
 
     }
     return (
-        <TouchableOpacity className='flex-row w-11/12 bg-white rounded-3xl mt-3 p-2 justify-between items-center'>
+        <TouchableOpacity className='flex-row bg-white rounded-3xl mt-2 p-2 justify-between items-center'>
             <View className='w-10/12 rounded-xl'>
                 <View className='flex-row justify-between gap-2'>
                     <Image source={{

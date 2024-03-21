@@ -1,5 +1,4 @@
 import { Text, View, ScrollView, ActivityIndicator } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useState, useEffect } from 'react'
 import { useColorScheme } from 'nativewind'
@@ -9,7 +8,6 @@ import Header from '../../components/Header/Header'
 import productApi from '../../apis/productApi'
 
 const ProductsScreen = () => {
-  const navigation = useNavigation()
   const { colorScheme } = useColorScheme()
   const styles = getStyles(colorScheme)
   const [products, setProducts] = useState([])
@@ -29,8 +27,9 @@ const ProductsScreen = () => {
       .catch(err => {
         console.log(err)
         setShowMessage(true)
+      }).finally(() => {
+        setIsLoading(false)
       })
-    setIsLoading(false)
   }
 
   const handleScroll = ({ nativeEvent }) => {
@@ -57,14 +56,14 @@ const ProductsScreen = () => {
             <Text className='text-xl font-bold' >Sản phẩm</Text>
             <Icon name='filter' size={30} />
           </View>
-          {isLoading && <ActivityIndicator size="large" color="#0000ff" style={{ height: 100 }} />}
           <ScrollView onScroll={handleScroll} scrollEventThrottle={16}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 20, flexWrap: 'wrap' }}>
               {products.map((product, index) => (
                 <ProductHomeSale product={product} key={index} />
               ))}
-              {showMessage && <Text className='flex-1  text-center text-base text-gray-500 font-semibold'>Bạn đã đến cuối trang</Text>}
             </View>
+            {isLoading && <ActivityIndicator size="large" color="#009ACD" style={{ height: 100 }} />}
+            {showMessage && <Text className='flex-1 mt-1 text-center text-base text-gray-500 font-semibold'>Bạn đã đến cuối trang</Text>}
           </ScrollView>
         </View>
       </View>

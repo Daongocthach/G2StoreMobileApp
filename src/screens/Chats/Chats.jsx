@@ -22,7 +22,7 @@ const Chats = ({ route }) => {
             <View style={styles.body}>
                 <Text style={styles.title}>Trò chuyện</Text>
                 <ScrollView className='w-full mb-5'>
-                    <View className='items-center'>
+                    <View className='items-center p-1'>
                         <Chat />
                         <Chat />
                         <Chat />

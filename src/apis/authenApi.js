@@ -1,11 +1,11 @@
 import axios from 'axios'
 const authenApi = {
     signin(username, password) {
-        const url = 'http://192.168.114.86:8080/api/v1/signin/customer'
+        const url = 'http://192.168.1.6:8080/api/v1/signin/customer'
         return axios.get(url, { params: { username, password } })
     },
     signup(username, password, email, fullName, phoneNo) {
-        const url = 'http://192.168.114.86:8080/api/v1/signup'
+        const url = 'http://192.168.1.6:8080/api/v1/signup'
         return axios.post(url, {
             username,
             password,
@@ -15,17 +15,17 @@ const authenApi = {
         })
     },
     forgotPassword(email) {
-        const url = `http://192.168.114.86:8080/api/v1/customer/forgot-password?email=${email}`
+        const url = `http://192.168.1.6:8080/api/v1/customer/forgot-password?email=${email}`
         return axios.get(url)
     },
     updateProfile(id, fullName, phoneNo, avatar, province, district, districtId, ward, address) {
-        const url = 'http://192.168.114.86:8080/api/v1/update-profile'
+        const url = 'http://192.168.1.6:8080/api/v1/update-profile'
         return axios.put(url, {
            id, fullName, phoneNo, avatar, province, district, districtId, ward, address
         })
     },
     updatePassword(id, password, newPassword) {
-        const url = `http://192.168.114.86:8080/api/v1/customer/update-password?newPassword=${newPassword}`
+        const url = `http://192.168.1.6:8080/api/v1/customer/update-password?newPassword=${newPassword}`
         return axios.post(url, {
            id, password
         })

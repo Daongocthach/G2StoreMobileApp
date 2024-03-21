@@ -24,7 +24,6 @@ const getStyles = (colorScheme) => {
       color: colorScheme == 'light' ? '#666666' : '#D7D7D7'
     },
     body: {
-      marginTop: 20,
       backgroundColor: colorScheme == 'light' ? 'white' : '#121212',
       gap: 5,
       alignItems:'center'

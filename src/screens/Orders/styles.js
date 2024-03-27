@@ -16,7 +16,6 @@ const getStyles = (colorScheme) => {
       marginTop: 2,
       flexDirection: 'column',
       display: 'flex',
-      alignItems:'center',
       backgroundColor: colorScheme == 'dark' ? 'black' : '#EEEEEE',
       padding: 1,
       gap: 5

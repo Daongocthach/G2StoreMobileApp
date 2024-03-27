@@ -1,24 +1,54 @@
-import { Text, View, TextInput, Dimensions, TouchableOpacity } from 'react-native'
+import { Text, View, TextInput, Dimensions, TouchableOpacity, Alert } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Icon1 from 'react-native-vector-icons/FontAwesome'
 import { useColorScheme } from 'nativewind'
 import { useNavigation } from '@react-navigation/native'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import getStyles from './styles'
+import { logout } from '../../redux/actions/auth'
+import showAlertOk from '../Alert/AlertOk'
 
 const { width, height } = Dimensions.get('window')
 
 function Header() {
+    const dispatch = useDispatch()
     const navigation = useNavigation()
     const { colorScheme } = useColorScheme()
     const styles = getStyles(colorScheme)
     const cartItems = useSelector(state => state.cart.cartItems)
+    const user = useSelector(state => state.auth)
+    const handleLogout = () => {
+        Alert.alert(
+            'Bạn muốn đăng xuất',
+            'Bấm để tiếp tục!',
+            [
+                {
+                    text: 'Hủy',
+                    style: 'cancel'
+                },
+                {
+                    text: 'Chấp nhận',
+                    onPress: () => {
+                        dispatch(logout())
+                        showAlertOk('Bạn đã đăng xuất thành công', 'Bấm Ok để tiếp tục')
+                    },
+                    style: 'default'
+                }
+            ]
+        )
+    }
     return (
         <View style={{ backgroundColor: '#EEEEEE' }}>
             <View style={{ marginTop: 40, height: height / 15, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20 }}>
-                <TouchableOpacity style={{ flex: 1, paddingLeft: 5 }}>
-                    <Icon name='menu' size={30} style={{ color: '#333333' }} />
-                </TouchableOpacity>
+                {user?.id ?
+                    <TouchableOpacity style={{ flex: 1, paddingLeft: 5 }} onPress={handleLogout}>
+                        <Icon name='logout' size={30} style={{ color: '#333333' }} />
+                    </TouchableOpacity> :
+                    <TouchableOpacity style={{ flex: 1, paddingLeft: 5 }} onPress={() => navigation.navigate('Login')}>
+                        <Icon name='login' size={30} style={{ color: '#333333' }} />
+                    </TouchableOpacity>
+                }
+
                 <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'white', flex: 5, height: '90%', paddingLeft: 10, borderRadius: 30, gap: 5, borderColor: '#828282', borderWidth: 1 }}
                     onPress={() => navigation.navigate('SearchResult')}>
                     <Icon1 name='search' size={25} style={{ color: 'gray' }} />

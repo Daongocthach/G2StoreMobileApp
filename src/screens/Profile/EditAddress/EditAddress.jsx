@@ -28,14 +28,6 @@ const EditAddress = ({ route }) => {
                 <ScrollView className='w-full mb-5'>
                     <View className='items-center'>
                         <Address />
-                        <Address />
-                        <Address />
-                        <Address />
-                        <Address />
-                        <Address />
-                        <Address />
-                        <Address />
-                        <Address />
                     </View>
                 </ScrollView>
 

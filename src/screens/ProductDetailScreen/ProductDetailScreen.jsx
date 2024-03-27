@@ -30,7 +30,7 @@ const ProductDetailScreen = ({ route }) => {
         heightReviews = product?.reviews ? product?.reviews?.length * 160 : 300
     }
     function handleClickAddToCart() {
-        if (user && product && cartItems) {
+        if (user?.id && product && cartItems) {
             var update = false
             var quantity = 1
             cartItems.forEach(cartItem => {
@@ -74,6 +74,7 @@ const ProductDetailScreen = ({ route }) => {
             }
         } else {
             console.error('User hoặc Product không tồn tại.')
+            showAlertOk('Bạn chưa đăng nhập', 'Vui lòng đăng nhập để thực hiện chức năng!')
         }
     }
     const layout = useWindowDimensions()
@@ -130,11 +131,11 @@ const ProductDetailScreen = ({ route }) => {
                     <Text className='text-sm font-medium text-gray-600 text-right'>Gian hàng</Text>
                 </View>
                 <TouchableOpacity className='flex-column items-center' onPress={() => { navigation.navigate('Hỏi đáp') }}>
-                    <Icon name='chat-outline' size={30} color={'gray'} />
+                    <Icon name='chat' size={30} color={'#BBBBBB'} />
                     <Text className='text-sm font-medium text-gray-600 text-right'>Chat</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ ...styles.buttonSubmit, backgroundColor: '#EE2C2C' }}>
-                    <Text style={{ ...styles.text, color: 'white' }}>Mua hàng</Text>
+                <TouchableOpacity style={{ ...styles.buttonSubmit, backgroundColor: '#FF4040' }}>
+                    <Text style={{ ...styles.text, color: 'white' }}>Yêu thích</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={{ ...styles.buttonSubmit, backgroundColor: '#31A063' }} onPress={handleClickAddToCart}>
                     <Text style={{ ...styles.text, color: 'white' }}>Thêm vào giỏ</Text>

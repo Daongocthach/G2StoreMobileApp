@@ -1,4 +1,4 @@
-import { Text, View, Image, TouchableOpacity } from 'react-native'
+import { Text, View, Image, TouchableOpacity, Alert } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Icon1 from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native'
@@ -18,8 +18,24 @@ const Profile = () => {
   const avatar = user?.avatar
   const styles = getStyles(colorScheme)
   const handleLogout = () => {
-    dispatch(logout())
-    showAlertOk('Bạn đã đăng xuất thành công', 'Bấm Ok để tiếp tục')
+    Alert.alert(
+      'Bạn muốn đăng xuất',
+      'Bấm để tiếp tục!',
+      [
+        {
+          text: 'Hủy',
+          style: 'cancel'
+        },
+        {
+          text: 'Chấp nhận',
+          onPress: () => {
+            dispatch(logout())
+            showAlertOk('Bạn đã đăng xuất thành công', 'Bấm Ok để tiếp tục')
+          },
+          style: 'default'
+        }
+      ]
+    )
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -35,7 +51,7 @@ const Profile = () => {
         <TouchableOpacity className='flex-row justify-between items-center pl-5' onPress={() => navigation.navigate('Login')}>
           <View className='flex-row items-center gap-5'>
             <Icon name='login' size={30} />
-            <Text className='text-xl font-semibold text-gray-600'>Dăng nhập</Text>
+            <Text className='text-xl font-semibold text-gray-600'>Đăng nhập</Text>
           </View>
           <Icon name='chevron-right' size={30} style={{ marginRight: 20 }} />
         </TouchableOpacity>
@@ -66,13 +82,6 @@ const Profile = () => {
           <View className='flex-row items-center gap-5'>
             <Icon name='map-marker-circle' size={30} />
             <Text className='text-xl font-semibold text-gray-600'>Địa chỉ nhận hàng</Text>
-          </View>
-          <Icon name='chevron-right' size={30} style={{ marginRight: 20 }} />
-        </TouchableOpacity>
-        <TouchableOpacity className='flex-row justify-between items-center pl-5' onPress={() => navigation.navigate('EditBank')}>
-          <View className='flex-row items-center gap-5'>
-            <Icon name='bank-outline' size={30} />
-            <Text className='text-xl font-semibold text-gray-600'>Thông tin ngân hàng</Text>
           </View>
           <Icon name='chevron-right' size={30} style={{ marginRight: 20 }} />
         </TouchableOpacity>

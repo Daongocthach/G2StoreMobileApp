@@ -1,15 +1,15 @@
 import axios from 'axios'
 const subCategoryApi = {
     getAllEnabledSubCategories() {
-        const url = 'http://192.168.1.6:8080/api/v1/sub-categories-enabled'
+        const url = `${process.env.EXPO_PUBLIC_API_URL}sub-categories-enabled`
         return axios.get(url)
     },
     getSubCategoryById(id) {
-        const url = `http://192.168.1.6:8080/api/v1/sub-category/${id}`
+        const url = `${process.env.EXPO_PUBLIC_API_URL}sub-category/${id}`
         return axios.get(url)
     },
     getSubCategoriesByCateId(id) {
-        const url = `http://192.168.1.6:8080/api/v1/sub-categories/${id}`
+        const url = `${process.env.EXPO_PUBLIC_API_URL}sub-categories/${id}`
         return axios.get(url)
     },
 }

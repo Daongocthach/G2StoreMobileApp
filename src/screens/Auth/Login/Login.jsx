@@ -51,9 +51,6 @@ function Login() {
       <Icon name='chevron-left' size={40} style={{ marginLeft: 20 }} />
       <View style={styles.body}>
         <Text style={styles.title}>Đăng nhập</Text>
-        {loading && <View style={{ alignItems: 'center' }}>
-          <Progress.Circle size={80} indeterminate={true} borderWidth={3} />
-        </View>}
         <View style={{ ...styles.flexView, marginHorizontal: 20, marginTop: 40 }}>
           <TextInput style={styles.input} placeholder='Nhập tên đăng nhập' placeholderTextColor={'#BBBBBB'} onChangeText={setUsername} value={username} />
         </View>
@@ -68,6 +65,9 @@ function Login() {
           <Text style={{ ...styles.textTitle, textAlign: 'right' }} onPress={() => { navigation.navigate('Register') }}>Đăng ký ?</Text>
         </View>
       </View>
+      {loading && <View className='fixed top-0 left-0 w-full h-full bg-700 bg-opacity-50 flex justify-center items-center z-50'>
+        <Progress.Circle size={80} indeterminate={true} borderWidth={3} />
+      </View>}
     </View >
   )
 }

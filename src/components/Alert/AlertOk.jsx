@@ -6,7 +6,7 @@ const showAlertOk = (title, message) =>
         [
             {
                 text: 'Ok',
-                style: 'default'
+                style: 'destructive'
             }
         ]
     )

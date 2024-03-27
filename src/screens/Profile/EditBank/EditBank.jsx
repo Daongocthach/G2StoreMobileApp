@@ -28,8 +28,6 @@ const EditBank = ({ route }) => {
                 <ScrollView className='w-full mb-5'>
                     <View className='items-center'>
                         <Bank />
-                        <Bank />
-                        <Bank />
                     </View>
                 </ScrollView>
 

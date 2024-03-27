@@ -1,27 +1,27 @@
 import axios from 'axios'
 const productApi = {
     getAllEnabledProducts(page) {
-        const url = `http://192.168.1.6:8080/api/v1/products-enabled?page=${page}`
+        const url = `${process.env.EXPO_PUBLIC_API_URL}products-enabled?page=${page}`
         return axios.get(url)
     },
     getProductById(id) {
-        const url = `http://192.168.1.6:8080/api/v1/product/${id}`
+        const url = `${process.env.EXPO_PUBLIC_API_URL}product/${id}`
         return axios.get(url)
     },
     getProductsByProviderId(id) {
-        const url = `http://192.168.1.6:8080/api/v1/products-provider/${id}`
+        const url = `${process.env.EXPO_PUBLIC_API_URL}products-provider/${id}`
         return axios.get(url)
     },
     getProductsBySubCategoryId(id) {
-        const url = `http://192.168.1.6:8080/api/v1/products-subcategory/${id}`
+        const url = `${process.env.EXPO_PUBLIC_API_URL}products-subcategory/${id}`
         return axios.get(url)
     },
     getProductsByCategoryId(id) {
-        const url = `http://192.168.1.6:8080/api/v1/products-category/${id}`
+        const url = `${process.env.EXPO_PUBLIC_API_URL}products-category/${id}`
         return axios.get(url)
     },
     searchProductsByName(keyword) {
-        const url = `http://192.168.1.6:8080/api/v1/products-search?keyword=${keyword}`
+        const url = `${process.env.EXPO_PUBLIC_API_URL}products-search?keyword=${keyword}`
         return axios.get(url)
     }
 }

@@ -2,31 +2,31 @@ import axios from 'axios'
 
 const cartItemApi = {
   getAllCartItems() {
-    const url = 'http://192.168.1.6:8080/api/v1/cartitems'
+    const url = `${process.env.EXPO_PUBLIC_API_URL}cartitems`
     return axios.get(url)
   },
   getCartItemById(customerId, productId) {
-    const url = `http://192.168.1.6:8080/api/v1/cartitem?customerId=${customerId}&productId=${productId}`
+    const url = `${process.env.EXPO_PUBLIC_API_URL}cartitem?customerId=${customerId}&productId=${productId}`
     return axios.get(url)
   },
   addCartItem(cartItem) {
-    const url = 'http://192.168.1.6:8080/api/v1/add-cartitems'
+    const url = `${process.env.EXPO_PUBLIC_API_URL}add-cartitems`
     return axios.post(url, cartItem)
   },
   updateCartItem(cartItem) {
-    const url = 'http://192.168.1.6:8080/api/v1/update-cartitems'
+    const url = `${process.env.EXPO_PUBLIC_API_URL}update-cartitems`
     return axios.put(url, cartItem)
   },
   deleteCartItem(customerId, productId) {
-    const url = `http://192.168.1.6:8080/api/v1/delete-cartitem?customerId=${customerId}&productId=${productId}`
+    const url = `${process.env.EXPO_PUBLIC_API_URL}delete-cartitem?customerId=${customerId}&productId=${productId}`
     return axios.delete(url)
   },
   deleteAllCartItemByCustomerId(customerId) {
-    const url = `http://192.168.1.6:8080/api/v1/delete-cartitems-customer?customerId=${customerId}`
+    const url = `${process.env.EXPO_PUBLIC_API_URL}delete-cartitems-customer?customerId=${customerId}`
     return axios.delete(url)
   },
   getCartItemsByCustomerId(customerId) {
-    const url = `http://192.168.1.6:8080/api/v1/cartitems-customer?customerId=${customerId}`
+    const url = `${process.env.EXPO_PUBLIC_API_URL}cartitems-customer?customerId=${customerId}`
     return axios.get(url)
   }
 }

@@ -42,8 +42,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("http://localhost:8000");
-        configuration.addAllowedOrigin("http://localhost:4000");
+        configuration.addAllowedOrigin("http://localhost:8001");
+        configuration.addAllowedOrigin("http://localhost:8002");
+        configuration.addAllowedOrigin("http://localhost:8003");
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);

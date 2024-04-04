@@ -27,6 +27,10 @@ public class ProductController {
     public ResponseEntity<Page<Product>> getAllEnabledProducts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "8") int size) {
         return ResponseEntity.ok(productService.getAllEnabledProducts(page, size));
     }
+    @GetMapping("/api/v1/top-10-products")
+    public ResponseEntity<Page<Product>> getTop10Products(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+        return ResponseEntity.ok(productService.getTop10Products(page, size));
+    }
     @GetMapping("/api/v1/products-category/{id}")
     public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(productService.getProductsByCategory(id));

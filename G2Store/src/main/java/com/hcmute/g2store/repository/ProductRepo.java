@@ -17,6 +17,8 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
     @Query("select s from Product s where s.provider.id = ?1")
     List<Product> findAllByProvider(Integer id);
     Page<Product> findByIsEnabled(boolean isEnabled, Pageable pageable);
+    @Query(value = "SELECT p FROM Product p ORDER BY p.sold DESC")
+    Page<Product> findTop10Products(Pageable pageable);
     @Query("SELECT p FROM Product p " +
             "INNER JOIN p.subCategory sc " +
             "INNER JOIN sc.category c " +
@@ -24,4 +26,5 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
     List<Product> findProductsByCategory(Integer categoryId);
     @Query("SELECT p FROM Product p WHERE p.name LIKE %:keyword%")
     List<Product> searchProductsByName(String keyword);
+
 }

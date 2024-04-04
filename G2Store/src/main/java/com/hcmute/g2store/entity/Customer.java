@@ -58,7 +58,4 @@ public class Customer {
     private Set<CartItem> items;
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private Set<OrderItem> orderItems;
-
-
-
 }

@@ -12,6 +12,7 @@ public interface ProductService {
     Product delProduct(Integer id);
     Product getProductById(Integer id);
     Page<Product> getAllProducts(int page, int size);
+    Page<Product> getTop10Products(int page, int size);
     Page<Product> getAllEnabledProducts(int page, int size);
     List<Product> getProductsByCategory(Integer id);
     List<Product> searchProductsByName(String keyword);

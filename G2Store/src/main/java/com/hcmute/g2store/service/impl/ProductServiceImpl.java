@@ -92,6 +92,11 @@ public class ProductServiceImpl implements ProductService {
         return productRepo.findAll(pageable);
     }
     @Override
+    public Page<Product> getTop10Products(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return productRepo.findTop10Products(pageable);
+    }
+    @Override
     public Page<Product> getAllEnabledProducts(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Product> enabledProducts = productRepo.findByIsEnabled(true, pageable);

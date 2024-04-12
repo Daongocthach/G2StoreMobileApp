@@ -31,10 +31,9 @@ function GoodsReceived({ orderId }) {
     }
     return (
         <View>
-            <TouchableOpacity onPress={handleClickGoodsReceived} className='bg-green-500 rounded-xl p-2 items-center' >
+            <TouchableOpacity onPress={handleClickGoodsReceived} className='bg-green-600 rounded-xl p-2 items-center' >
                 <Text className='text-white font-bold'>Đã nhận hàng</Text>
             </TouchableOpacity>
-
         </View>
     )
 }

@@ -4,6 +4,14 @@ const productApi = {
         const url = `${process.env.EXPO_PUBLIC_API_URL}products-enabled?page=${page}`
         return axios.get(url)
     },
+    getAllEnabledProductsDesc(page) {
+        const url = `${process.env.EXPO_PUBLIC_API_URL}products-enabled-desc?page=${page}`
+        return axios.get(url)
+    },
+    getTop10Products(page) {
+        const url = `${process.env.EXPO_PUBLIC_API_URL}products-enabled?page=${page}`
+        return axios.get(url)
+    },
     getProductById(id) {
         const url = `${process.env.EXPO_PUBLIC_API_URL}product/${id}`
         return axios.get(url)

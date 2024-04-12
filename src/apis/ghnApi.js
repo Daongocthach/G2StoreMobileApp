@@ -40,7 +40,7 @@ const ghnApi = {
         })
     },
 
-    calculateFeeShip( districtId ) {
+    calculateFeeShip( districtId, height, length, weight, width) {
         const url = 'https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee'
         const requestData = {
             service_id: 53320,

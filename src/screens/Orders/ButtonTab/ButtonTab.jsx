@@ -17,9 +17,6 @@ function ButtonTab({ setOrders, user }) {
         else if (button == 'delivering')
             orderApi.getOrderByCustomerIdOnDelivery(user?.id)
                 .then((response) => { setOrders(response.data) })
-        else if (button == 'review')
-            orderApi.getOrderByCustomerIdSuccess(user?.id)
-                .then((response) => { setOrders(response.data) })
         else if (button == 'cancel')
             orderApi.getOrderByCustomerIdCancel(user?.id)
                 .then((response) => { setOrders(response.data) })
@@ -34,32 +31,28 @@ function ButtonTab({ setOrders, user }) {
     return (
         <View className='flex-row items-center justify-between bg-white p-2 mt-2'>
             <TouchableOpacity className='items-center gap-1 flex-1' onPress={() => handleGetOrders('ordered')} >
-                <Icon name='calendar-check' size={25} color={selectedButton === 'ordered' ? '#3CB371' : 'gray'} />
-                <Text className='text-xs text-gray-500 w-14 h-10 text-center' style={{ color: selectedButton === 'ordered' ? '#3CB371' : 'gray' }}>Đã đặt hàng</Text>
+                <Icon name='calendar-check' size={25} color={selectedButton === 'ordered' ? '#00B2EE' : 'gray'} />
+                <Text className='text-xs text-gray-500 w-14 h-10 text-center font-medium' style={{ color: selectedButton === 'ordered' ? '#00B2EE' : 'gray' }}>Đã đặt hàng</Text>
             </TouchableOpacity>
             <TouchableOpacity className='items-center gap-1 flex-1' onPress={() => handleGetOrders('packaged')}>
-                <Icon name='package-variant-closed' size={25} color={selectedButton === 'packaged' ? '#3CB371' : 'gray'} />
-                <Text className='text-xs text-gray-500 w-14 h-10 text-center' style={{ color: selectedButton === 'packaged' ? '#3CB371' : 'gray' }}>Đã xác nhận</Text>
+                <Icon name='package-variant-closed' size={25} color={selectedButton === 'packaged' ? '#00B2EE' : 'gray'} />
+                <Text className='text-xs text-gray-500 w-14 h-10 text-center font-medium' style={{ color: selectedButton === 'packaged' ? '#00B2EE' : 'gray' }}>Đã xác nhận</Text>
             </TouchableOpacity>
             <TouchableOpacity className='items-center gap-1 flex-1' onPress={() => handleGetOrders('delivering')}>
-                <Icon name='truck-delivery' size={25} color={selectedButton === 'delivering' ? '#3CB371' : 'gray'} />
-                <Text className='text-xs text-gray-500 w-14 h-10 text-center' style={{ color: selectedButton === 'delivering' ? '#3CB371' : 'gray' }}>Đang giao hàng</Text>
-            </TouchableOpacity>
-            <TouchableOpacity className='items-center gap-1 flex-1' onPress={() => handleGetOrders('review')} >
-                <Icon name='clipboard-check' size={25} color={selectedButton === 'review' ? '#3CB371' : 'gray'} />
-                <Text className='text-xs text-gray-500 w-14 h-10 text-center' style={{ color: selectedButton === 'review' ? '#3CB371' : 'gray' }}>Chưa đánh giá</Text>
-            </TouchableOpacity>
-            <TouchableOpacity className='items-center gap-1 flex-1' onPress={() => handleGetOrders('cancel')} >
-                <Icon name='archive-cancel' size={25} color={selectedButton === 'cancel' ? '#3CB371' : 'gray'} />
-                <Text className='text-xs text-gray-500 w-14 h-10 text-center' style={{ color: selectedButton === 'cancel' ? '#3CB371' : 'gray' }}>Đã hủy đơn</Text>
+                <Icon name='truck-delivery' size={25} color={selectedButton === 'delivering' ? '#00B2EE' : 'gray'} />
+                <Text className='text-xs text-gray-500 w-14 h-10 text-center font-medium' style={{ color: selectedButton === 'delivering' ? '#00B2EE' : 'gray' }}>Đang giao hàng</Text>
             </TouchableOpacity>
             <TouchableOpacity className='items-center gap-1 flex-1' onPress={() => handleGetOrders('success')} >
-                <Icon name='checkbox-marked' size={25} color={selectedButton === 'success' ? '#3CB371' : 'gray'} />
-                <Text className='text-xs text-gray-500 w-14 h-10 text-center' style={{ color: selectedButton === 'success' ? '#3CB371' : 'gray' }}>Thành công</Text>
+                <Icon name='clipboard-check' size={25} color={selectedButton === 'success' ? '#00B2EE' : 'gray'} />
+                <Text className='text-xs text-gray-500 w-14 h-10 text-center font-medium' style={{ color: selectedButton === 'success' ? '#00B2EE' : 'gray' }}>Thành công</Text>
+            </TouchableOpacity>
+            <TouchableOpacity className='items-center gap-1 flex-1' onPress={() => handleGetOrders('cancel')} >
+                <Icon name='archive-cancel' size={25} color={selectedButton === 'cancel' ? '#00B2EE' : 'gray'} />
+                <Text className='text-xs text-gray-500 w-14 h-10 text-center font-medium' style={{ color: selectedButton === 'cancel' ? '#00B2EE' : 'gray' }}>Đã hủy đơn</Text>
             </TouchableOpacity>
             <TouchableOpacity className='items-center gap-1 flex-1' onPress={() => handleGetOrders('all')} >
-                <Icon name='checkbox-marked' size={25} color={selectedButton === 'all' ? '#3CB371' : 'gray'} />
-                <Text className='text-xs text-gray-500 w-14 h-10 text-center' style={{ color: selectedButton === 'all' ? '#3CB371' : 'gray' }}>Tất cả đơn</Text>
+                <Icon name='checkbox-marked' size={25} color={selectedButton === 'all' ? '#00B2EE' : 'gray'} />
+                <Text className='text-xs text-gray-500 w-14 h-10 text-center font-medium' style={{ color: selectedButton === 'all' ? '#00B2EE' : 'gray' }}>Tất cả đơn</Text>
             </TouchableOpacity>
         </View>
 

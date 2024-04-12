@@ -4,13 +4,13 @@ import { useNavigation } from '@react-navigation/native'
 import { useColorScheme } from 'nativewind'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import * as Progress from 'react-native-progress'
 import getStyles from './styles'
 import showAlertOk from '../../../components/Alert/AlertOk'
 import { login } from '../../../redux/actions/auth'
 import authenApi from '../../../apis/authenApi'
 import cartItemApi from '../../../apis/cartItemApi'
 import { setCart } from '../../../redux/actions/cart'
+import Loading from '../../../components/Loading/Loading'
 
 function Login() {
   const dispatch = useDispatch()
@@ -65,9 +65,7 @@ function Login() {
           <Text style={{ ...styles.textTitle, textAlign: 'right' }} onPress={() => { navigation.navigate('Register') }}>Đăng ký ?</Text>
         </View>
       </View>
-      {loading && <View className='fixed top-0 left-0 w-full h-full bg-700 bg-opacity-50 flex justify-center items-center z-50'>
-        <Progress.Circle size={80} indeterminate={true} borderWidth={3} />
-      </View>}
+      {loading && <Loading/>}
     </View >
   )
 }

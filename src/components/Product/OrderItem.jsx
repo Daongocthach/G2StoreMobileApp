@@ -1,11 +1,21 @@
-import { Text, View, Image, TouchableOpacity } from 'react-native'
+import { Text, View, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { formatCurrency } from '../../utils/price'
+import reviewApi from '../../apis/reviewApi'
+import { useState } from 'react'
+import ModalDialog from '../ModalDialog/ModalDialog'
 
-
-
-function OrderItem({ product, isReview }) {
-
+function OrderItem({ product, userId, orderStatus }) {
+    const [isReview, setIsReview] = useState(false)
+    useState(() => {
+        reviewApi.getReviewByCustomerAndProduct(userId, product?.id)
+            .then(() => {
+                setIsReview(false)
+            })
+            .catch(() => {
+                setIsReview(true)
+            })
+    }, [product])
     return (
         <View className='flex-row justify-between p-1 items-center'>
             <View className='flex-row flex-1 gap-2'>
@@ -17,9 +27,7 @@ function OrderItem({ product, isReview }) {
                     <View className='flex-row items-center mt-1'>
                         <Text className='text-sm font-bold text-red-500'>{formatCurrency(product?.price)}</Text>
                         <Text className='text-base text-gray-400 w-10 text-center' >x 1</Text>
-                        {isReview && <TouchableOpacity className='items-center bg-green-600 rounded-2xl p-1' >
-                            <Text className='text-sm text-white text-center' >Đánh giá</Text>
-                        </TouchableOpacity>}
+                        {isReview && orderStatus === 'SUCCESS' && <ModalDialog productId={product?.id} userId={userId}/>}
                     </View>
                 </View>
             </View>

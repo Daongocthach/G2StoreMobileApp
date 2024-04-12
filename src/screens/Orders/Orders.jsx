@@ -1,21 +1,19 @@
-import { Text, View, TouchableOpacity, ScrollView, Image } from 'react-native'
+import { Text, View, ScrollView, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useNavigation } from '@react-navigation/native'
 import { useColorScheme } from 'nativewind'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import getStyles from './styles'
 import ButtonTab from './ButtonTab/ButtonTab'
 import OrderItem from '../../components/Product/OrderItem'
 import orderApi from '../../apis/orderApi'
-import emptyOrder from '../../../assets/empty-order.png'
 import DeleteOrder from './DeleteOrder/DeleteOrder'
 import { formatCurrency } from '../../utils/price'
 import GoodsReceived from './GoodsReceived/GoodsReceived'
 
 const Orders = () => {
-    const dispatch = useDispatch()
     const user = useSelector(state => state.auth)
     const navigation = useNavigation()
     const { colorScheme, toggleColorScheme } = useColorScheme()
@@ -56,7 +54,7 @@ const Orders = () => {
                                 </View>
                                 <View className='w-full'>
                                     {order?.orderItems.map((orderItem, index) =>
-                                        <OrderItem product={orderItem?.product} key={index} />
+                                        <OrderItem product={orderItem?.product} userId={user?.id} orderStatus={order?.orderStatus} key={index} />
                                     )}
                                 </View>
                                 <View className='flex-row items-center py-2 justify-between pr-2'>
@@ -69,15 +67,11 @@ const Orders = () => {
                                         <Text className='text-lg font-bold text-red-600'>{formatCurrency(order.total)}</Text>
                                     </View>
                                 </View>
-                                {orders.length < 1 && <View className='flex-row items-center gap-1'>
-                                    <Image source={{
-                                        uri: emptyOrder || 'https://th.bing.com/th/id/OIP.aHNtkforW_FGqv0olWaVngHaFf?rs=1&pid=ImgDetMain'
-                                    }} style={{ height: 70, width: 70, borderRadius: 10 }} />
-                                    <Text >Bạn chưa có đơn hàng nào</Text>
-                                    <Text >Cùng khám phá hàng ngàn sản phẩm tại G2Store nhé!</Text>
-                                </View>}
-
                             </View>)}
+                        {orders.length < 1 && <View className='items-center gap-1 mt-2'>
+                            <Image source={require('../../../assets/empty-order.png')} style={{ height: 200, width: 200 }} />
+                            <Text className='font-semibold text-base text-gray-500' >Bạn chưa có đơn hàng nào </Text>
+                        </View>}
                     </View>
                 </ScrollView>
             </View>

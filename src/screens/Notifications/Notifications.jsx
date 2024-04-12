@@ -1,31 +1,32 @@
-import { Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { useNavigation } from '@react-navigation/native'
+import { Text, View, ScrollView } from 'react-native'
 import { useColorScheme } from 'nativewind'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import notificationApi from '../../apis/notificationApi'
 import getStyles from './styles'
 import Notification from '../../components/Notification/Notification'
 
 
-const Notifications = ({ route }) => {
-    const dispatch = useDispatch()
-    const navigation = useNavigation()
+const Notifications = () => {
     const { colorScheme, toggleColorScheme } = useColorScheme()
+    const [notifications, setNotifications] = useState([])
     const styles = getStyles(colorScheme)
-    const handleSave = () => {
-
-    }
+    useEffect(() => {
+        notificationApi.getAllnotifications()
+            .then((response) => {
+                setNotifications(response.data)
+            })
+            .catch(err => console.log(err))
+    }, [])
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.body}>
                 <Text style={styles.title}>Thông báo</Text>
                 <ScrollView className='w-full mb-5'>
                     <View className='items-center'>
-                        <Notification />
-                        <Notification />
-                        <Notification />
+                        {Array.isArray(notifications) && notifications.map((notification, index) => (
+                            <Notification key={index} notification={notification}/>
+                        )) }
                     </View>
                 </ScrollView>
 

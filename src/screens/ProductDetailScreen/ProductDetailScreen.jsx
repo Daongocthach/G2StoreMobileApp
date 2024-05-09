@@ -1,18 +1,20 @@
 import { Text, View, Dimensions, useWindowDimensions, ScrollView, TouchableOpacity, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { TabView, TabBar } from 'react-native-tab-view'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useColorScheme } from 'nativewind'
 import { useSelector, useDispatch } from 'react-redux'
 import getStyles from './styles'
 import ProductDetail from '../../components/Product/ProductDetail'
 import Details from './Details/Details'
-import Review from './Review/Review'
+import Reviews from './Reviews/Reviews'
 import Header from '../../components/Header/Header'
 import cartItemApi from '../../apis/cartItemApi'
 import { updateQuantity, addToCart } from '../../redux/actions/cart'
 import showAlertOk from '../../components/Alert/AlertOk'
+import reviewApi from '../../apis/reviewApi'
 
 const { width, height } = Dimensions.get('window')
 
@@ -23,6 +25,7 @@ const ProductDetailScreen = ({ route }) => {
     const styles = getStyles(colorScheme)
     const user = useSelector(state => state.auth)
     const cartItems = useSelector(state => state.cart.cartItems)
+    const [reviews, setReviews] = useState([])
     let product
     let heightReviews = 0
     if (route.params.product) {
@@ -88,7 +91,7 @@ const ProductDetailScreen = ({ route }) => {
             case 'first':
                 return <Details description={product?.description} />
             case 'second':
-                return <Review productId={product?._id} />
+                return <Reviews reviews={reviews} />
             default:
                 return null
         }
@@ -103,13 +106,19 @@ const ProductDetailScreen = ({ route }) => {
             labelStyle={{ fontSize: 13, fontWeight: 'bold' }}
         />
     )
+    useEffect(() => {
+        reviewApi.getReviewByProduct(product?.id)
+            .then((response) => {
+                setReviews(response.data)
+            })
+    }, [product])
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.body}>
                 <Header />
                 <ScrollView>
                     <View style={{ flexDirection: 'column', alignItems: 'center', height: height / 1.9, backgroundColor: 'blue' }}>
-                        <ProductDetail product={product} />
+                        <ProductDetail product={product} reviews={reviews} />
                     </View>
                     <View style={{ width: '100%', height: heightReviews }}>
                         <TabView
@@ -124,24 +133,20 @@ const ProductDetailScreen = ({ route }) => {
                 </ScrollView>
             </View>
             <View style={styles.footer}>
-                <View className='flex-column items-center'>
-                    <Image source={{
-                        uri: product?.image
-                    }} style={{ height: 30, width: 30, borderRadius: 15 }} />
-                    <Text className='text-sm font-medium text-gray-600 text-right'>Gian hàng</Text>
-                </View>
-                <TouchableOpacity className='flex-column items-center' onPress={() => { navigation.navigate('Hỏi đáp') }}>
+                <TouchableOpacity className='flex-column items-center justify-center flex-1' onPress={() => { navigation.navigate('Hỏi đáp') }}>
                     <Icon name='chat' size={30} color={'#BBBBBB'} />
                     <Text className='text-sm font-medium text-gray-600 text-right'>Chat</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ ...styles.buttonSubmit, backgroundColor: '#FF4040' }}>
-                    <Text style={{ ...styles.text, color: 'white' }}>Yêu thích</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{ ...styles.buttonSubmit, backgroundColor: '#31A063' }} onPress={handleClickAddToCart}>
-                    <Text style={{ ...styles.text, color: 'white' }}>Thêm vào giỏ</Text>
-                </TouchableOpacity>
+                <View className='flex-row items-center gap-2'>
+                    <TouchableOpacity style={{ ...styles.buttonSubmit, backgroundColor: '#FF4040' }}>
+                        <Text style={{ ...styles.text, color: 'white' }}>Yêu thích</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ ...styles.buttonSubmit, backgroundColor: '#31A063' }} onPress={handleClickAddToCart}>
+                        <Text style={{ ...styles.text, color: 'white' }}>Thêm vào giỏ</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View >
+        </SafeAreaView>
     )
 
 }

@@ -39,12 +39,12 @@ function Header() {
     }
     return (
         <View style={{ backgroundColor: '#EEEEEE' }}>
-            <View style={{ marginTop: 40, height: height / 15, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20 }}>
+            <View style={{ height: height / 15, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20 }}>
                 {user?.id ?
-                    <TouchableOpacity style={{ flex: 1, paddingLeft: 5 }} onPress={handleLogout}>
+                    <TouchableOpacity style={{ flex: 1 }} onPress={handleLogout}>
                         <Icon name='logout' size={30} style={{ color: '#333333' }} />
                     </TouchableOpacity> :
-                    <TouchableOpacity style={{ flex: 1, paddingLeft: 5 }} onPress={() => navigation.navigate('Login')}>
+                    <TouchableOpacity style={{ flex: 1 }} onPress={() => navigation.navigate('Login')}>
                         <Icon name='login' size={30} style={{ color: '#333333' }} />
                     </TouchableOpacity>
                 }
@@ -52,20 +52,12 @@ function Header() {
                 <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'white', flex: 5, height: '90%', paddingLeft: 10, borderRadius: 30, gap: 5, borderColor: '#828282', borderWidth: 1 }}
                     onPress={() => navigation.navigate('SearchResult')}>
                     <Icon1 name='search' size={25} style={{ color: 'gray' }} />
-                    <TextInput style={styles.input} className="text-black" placeholder='Search...' readOnly={true} />
+                    <TextInput style={styles.input} className="text-black" placeholder='Tìm kiếm...' readOnly={true} />
                 </TouchableOpacity>
                 <TouchableOpacity style={{ flex: 1, paddingLeft: 5 }} onPress={() => navigation.navigate('Cart')}>
                     <Icon name='cart' size={30} style={{ color: '#333333' }} />
-                    <View style={{
-                        position: 'absolute',
-                        right: -5,
-                        top: -5,
-                        backgroundColor: '#EE2C2C',
-                        borderRadius: 10,
-                        width: 20,
-                        height: 20,
-                        justifyContent: 'center',
-                        alignItems: 'center'
+                    <View style={{ position: 'absolute', right: -5, top: -5, backgroundColor: '#EE2C2C',
+                        borderRadius: 10, width: 20, height: 20, justifyContent: 'center', alignItems: 'center'
                     }}>
                         <Text style={{ color: 'white', fontSize: 12 }}>{cartItems.length || 0}</Text>
                     </View>

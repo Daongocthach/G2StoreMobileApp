@@ -4,11 +4,11 @@ import { useNavigation } from '@react-navigation/native'
 import { useColorScheme } from 'nativewind'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import * as Progress from 'react-native-progress'
 import getStyles from './styles'
 import showAlertOk from '../../../components/Alert/AlertOk'
 import authenApi from '../../../apis/authenApi'
 import { login } from '../../../redux/actions/auth'
+import Loading from '../../../components/Loading/Loading'
 
 
 function Register() {
@@ -59,9 +59,6 @@ function Register() {
       <Icon name='chevron-left' size={40} style={{ marginLeft: 20 }} />
       <View style={styles.body}>
         <Text style={styles.title}>Đăng ký</Text>
-        {loading && <View style={{ alignItems: 'center' }}>
-          <Progress.Circle size={80} indeterminate={true} borderWidth={3} />
-        </View>}
         <View style={{ ...styles.flexView, marginHorizontal: 20, marginTop: 40 }}>
           <TextInput style={styles.input} placeholder='Nhập email' placeholderTextColor={'#BBBBBB'} onChangeText={setEmail} value={email} />
         </View>
@@ -87,9 +84,7 @@ function Register() {
           <Text style={{ ...styles.textTitle, textAlign: 'right' }} onPress={() => { navigation.navigate('Login') }}>Bạn đã có tài khoản ? Đăng nhập ?</Text>
         </View>
       </View>
-      {loading && <View className='fixed top-0 left-0 w-full h-full bg-700 bg-opacity-50 flex justify-center items-center z-50'>
-        <Progress.Circle size={80} indeterminate={true} borderWidth={3} />
-      </View>}
+      {loading && <Loading/>}
     </View >
   )
 }

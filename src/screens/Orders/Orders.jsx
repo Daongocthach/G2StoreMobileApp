@@ -19,9 +19,39 @@ const Orders = () => {
     const { colorScheme, toggleColorScheme } = useColorScheme()
     const styles = getStyles(colorScheme)
     const [orders, setOrders] = useState([])
+    const [pending, setPending] = useState(0)
+    const [confirm, setConfirm] = useState(0)
+    const [delivery, setDelivery] = useState(0)
+    const [success, setSuccess] = useState(0)
+    const [cancel, setCancel] = useState(0)
+    const [all, setAll] = useState(0)
+
     const handleGetOrdersPending = () => {
         orderApi.getOrderByCustomerIdPending(user?.id)
-            .then((response) => { setOrders(response.data) })
+            .then((response) => {
+                setOrders(response.data)
+                setPending(response.data.length)
+            })
+        orderApi.getOrderByCustomerIdConfirmed(user?.id)
+            .then((response) => {
+                setConfirm(response.data.length)
+            })
+        orderApi.getOrderByCustomerIdOnDelivery(user?.id)
+            .then((response) => {
+                setDelivery(response.data.length)
+            })
+        orderApi.getOrderByCustomerIdCancel(user?.id)
+            .then((response) => {
+                setCancel(response.data.length)
+            })
+        orderApi.getOrderByCustomerIdSuccess(user?.id)
+            .then((response) => {
+                setSuccess(response.data.length)
+            })
+        orderApi.getOrderByCustomerId(user?.id)
+            .then((response) => {
+                setAll(response.data.length)
+            })
     }
     useEffect(() => {
         handleGetOrdersPending()
@@ -30,7 +60,8 @@ const Orders = () => {
         <SafeAreaView style={styles.container}>
             <Icon name='chevron-left' size={40} onPress={() => { navigation.navigate('Tài khoản') }} />
             <Text style={styles.title}>Đơn hàng của tôi</Text>
-            <ButtonTab setOrders={setOrders} user={user} />
+            <ButtonTab pending={pending} confirm={confirm} delivery={delivery} success={success} cancel={cancel}
+                all={all} setOrders={setOrders} user={user} />
             <View style={{ flex: 7 }}>
                 <ScrollView >
                     <View style={styles.body}>

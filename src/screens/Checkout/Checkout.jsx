@@ -72,6 +72,7 @@ const Checkout = () => {
             },
             'orderItems': orderItems
         }
+        console.log(order)
         orderApi.addOrder(order)
             .then(() => {
                 showAlertOk('Đặt hàng thành công', 'Bấm OK để tiếp tục')
